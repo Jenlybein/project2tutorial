@@ -63,7 +63,7 @@ git clone https://github.com/Jenlybein/project2tutorial.git "$env:USERPROFILE\.a
 | **2.5** | 横向清单：六张表 + 数字账本 + 归属冲突候选 | `.work/25-crosscut/lists.md`、`28-authoring/numbers.md` | source-auditor |
 | **2.8** | **冻结词表与唯一归属**：正名 + `_Avoid_`；一段代码只一个 owner | `.work/28-authoring/glossary.md`、`ownership.md` | longform-writer |
 | **3** | 切章写作：2–3 章一批、批间串行；每批交稿后抽检代码示例 | 章节正文 + `assets/` | longform-writer + content-creator |
-| **4** | 复现总纲：路线图 / 环境准备 / 排错手册 | `03-实现开始/00-复现总指引/` | content-creator |
+| **4** | 复现总纲：**预先准备**（外部账号与能力）/ 路线图 / 环境准备 / 排错手册 | `03-实现开始/00-复现总指引/` | content-creator |
 | **5** | 三向检查：改稿 / 技术校验 / 事实审计，并行；只出清单 | `.work/50-review/*.md` | writer + engineer + auditor |
 | **5.5** | 面试与简历：只基于定稿，逐条核落点 | `04-面试与简历/` | content-creator → source-auditor |
 | **6** | 汇编落盘：拍快照 → 跑脚本 → **error 清零才许汇报** | 修正入稿 + `README.md` | 主理人 |
