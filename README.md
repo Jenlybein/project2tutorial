@@ -8,6 +8,33 @@
 
 ---
 
+## 安装
+
+### 方式一：skills CLI（推荐，一行装好）
+
+```bash
+npx skills add https://github.com/Jenlybein/project2tutorial --skill project2tutorial
+```
+
+- 默认装到**当前项目**：CLI 会自动识别并写入 `.agents/skills/`、`.claude/skills/` 等目标目录，并生成 `skills-lock.json` 便于团队复现；
+- 加 `--global` 装到用户级，所有项目都能用；
+- 加 `--agent '*'` 装到本机所有它支持的 agent；
+- 只想先看看仓库里有什么：`npx skills add https://github.com/Jenlybein/project2tutorial -l`。
+
+### 方式二：手动 clone
+
+Skill 目录约定是 `~/.agents/skills/<name>/SKILL.md`，本仓库的根目录就是 skill 根，直接 clone 进去即可：
+
+```bash
+# macOS / Linux
+git clone https://github.com/Jenlybein/project2tutorial.git ~/.agents/skills/project2tutorial
+
+# Windows PowerShell
+git clone https://github.com/Jenlybein/project2tutorial.git "$env:USERPROFILE\.agents\skills\project2tutorial"
+```
+
+两种方式装出来的是同一份内容：`SKILL.md` + `references/` + `scripts/` + `assets/`。装好之后，遇到「帮我拆解这个项目」「把这个仓库讲透」「这个项目面试该怎么讲」这类请求，Agent 会自动加载它。
+
 ## 为什么值得用
 
 三个问题决定了它必须这么组织：
@@ -57,22 +84,6 @@
 | `ui-designer` | 颜有度 · UI 设计师 | 界面结构、交互链路、界面配图与视觉规范 | **可选**：有界面，或全书图 ≥ 8 张需要统一视觉规范时 |
 
 角色就是 `references/roles/<id>.md`；派工时把整篇交给子 agent，分工边界写死在文件里。
-
----
-
-## 安装
-
-Skill 目录约定是 `~/.agents/skills/<name>/SKILL.md`，本仓库的根目录就是 skill 根，直接 clone 进去即可：
-
-```bash
-# macOS / Linux
-git clone https://github.com/Jenlybein/project2tutorial.git ~/.agents/skills/project2tutorial
-
-# Windows PowerShell
-git clone https://github.com/Jenlybein/project2tutorial.git "$env:USERPROFILE\.agents\skills\project2tutorial"
-```
-
-装好之后，Agent 在遇到「帮我拆解这个项目」「把这个仓库讲透」「这个项目面试该怎么讲」这类请求时会自动加载它。
 
 ---
 
