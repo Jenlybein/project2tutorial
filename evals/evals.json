@@ -1,0 +1,34 @@
+{
+  "skill_name": "project2tutorial",
+  "note": "测试用例只描述场景与期望产出形态；断言在首轮跑完后按实际产出再补（skill-creator 的流程：先跑，再按结果写可验证的断言）。",
+  "evals": [
+    {
+      "id": 1,
+      "name": "full-teardown-and-tutorial",
+      "prompt": "我本地有个小项目 D:\\projects\\mini-rag，是做文档问答的，代码不多但我一直没真正看懂。帮我拆解它，输出一套能看懂也能自己从零复现的多章 Markdown 教程，放在当前工作目录下。",
+      "expected_output": "走 Workflow A：先有 .work/00-base/baseline.md 事实底座，再有 10-analysis 三份报告、20-arch 架构定稿、25-crosscut 横向清单；交付目录含 README.md（导航覆盖每个文件）、00-项目综述、01-整体架构（含模块清单表）、02-技术栈（精确版本）、03-实现开始/00-复现总指引（版本矩阵）与按步骤的三件套、04-面试与简历；assets/ 按章节分子目录且配图为 .svg 文件；全篇无 Mermaid、无字符画、无正文 SVG 源码；scripts/audit_teardown.py 退出码 0。",
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "architecture-only",
+      "prompt": "不用写教程，我只想搞明白 D:\\projects\\mini-rag 这个仓库到底分几块、每块干什么、一次问答请求是怎么从入口跑到向量库的。给我结构文档就行。",
+      "expected_output": "走 Workflow B（0 → 0.5 → 1 → 2 → 6），交付物只有架构文档：整体分层与启动到就绪、模块清单表 + 逐模块功能/作用/运行流程、关键链路推演，配手写 SVG 的分层图；不产出复现教程与面试简历章；子 agent 分工可见（底座、三视角分析、定稿各自独立完成），不是主 agent 一个人一口气写完。",
+      "files": []
+    },
+    {
+      "id": 3,
+      "name": "materials-to-chapters",
+      "prompt": "我攒了 20 多篇 markdown 笔记，在 D:\\notes\\kb-experiments 里，按专题写的（亮点、优化轮次、踩坑）。帮我整理成一套按实现步骤组织的多章教程，笔记里的数字和上限别丢。",
+      "expected_output": "走 Workflow D：0.5 素材底座（清单 + 主题聚类 + 引用锚点）→ 2.5 横向清单（数字/上限/边界/量化结论/矛盾/缺口六张表）→ 主笔切章成文 → 主笔 + 审计双查 → 汇编；横向专题内容被刻意对账，数字在正文有落点或明确标注舍弃；README 导航覆盖全部章节。",
+      "files": []
+    },
+    {
+      "id": 4,
+      "name": "interview-and-resume-only",
+      "prompt": "我的项目拆解教程已经写好了，在 ./mini-rag-拆解教程。现在帮我拆一下这个东西面试该怎么讲、简历上能怎么写。",
+      "expected_output": "走单点直调：content-creator 产出 04-面试与简历 四篇，素材全部取自已有定稿；source-auditor 逐条核验落点与身份表述；不出现通用八股模板，不把「复现」写成「开发」，数字标明口径；核验无落点的条目被删除或改写成可溯源表述。",
+      "files": []
+    }
+  ]
+}
