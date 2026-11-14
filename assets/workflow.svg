@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1620" role="img" aria-labelledby="wfTitle wfDesc">
-  <title id="wfTitle">project2tutorial 工作流：12 个阶段、6 个角色、1 道机械闸门</title>
-  <desc id="wfDesc">输入一份代码仓库、压缩包或素材目录，经需求确认、结构底座、多视角分析、架构定稿与口径冻结、横向清单、词表与归属冻结、分批切章写作、复现总纲、三向检查、面试与简历、汇编落盘（含脚本闸门），产出多章 Markdown 教程。</desc>
+  <title id="wfTitle">project2tutorial 工作流：11 个阶段、6 个角色、1 道机械闸门</title>
+  <desc id="wfDesc">输入一份代码仓库、压缩包或素材目录，经需求确认、结构底座、多视角分析、架构定稿与口径冻结、横向清单、词表与归属冻结、分批切章写作（每步四件套：00 来龙去脉、01 亮点难点，均由 content-creator 写；02 功能流程与架构由 longform-writer 写；03 具体实现由 content-creator 写）、复现总纲、三向检查、面试与简历、汇编落盘（含脚本闸门），产出多章 Markdown 教程。</desc>
 
   <defs>
     <marker id="arw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
@@ -12,7 +12,7 @@
 
   <text x="60" y="58" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="34" font-weight="700" fill="#045B89">project2tutorial</text>
   <text x="60" y="90" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="17" fill="#475569">把任意项目拆成一套能读懂、能复现、还能讲出去的多章 Markdown 教程</text>
-  <text x="1140" y="58" text-anchor="end" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="15" fill="#64748B">12 阶段 · 6 角色 · 1 道机械闸门</text>
+  <text x="1140" y="58" text-anchor="end" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="15" fill="#64748B">11 阶段 · 6 角色 · 1 道机械闸门</text>
 
   <rect x="60" y="112" width="330" height="64" rx="10" fill="#F1F5F9" stroke="#CBD5E1"/>
   <text x="88" y="140" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="15" font-weight="600" fill="#334155">代码仓库</text>
@@ -57,9 +57,9 @@
   <rect x="88" y="449" width="44" height="32" rx="16" fill="#045B89"/>
   <text x="110" y="471" text-anchor="middle" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="14" font-weight="700" fill="#FFFFFF">1</text>
   <text x="150" y="456" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="19" font-weight="700" fill="#0F172A">多视角分析</text>
-  <text x="150" y="482" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="14" fill="#475569">三份报告并行：架构 / 执行路径 /（有界面时）交互；全员先读底座，每份都给技术栈结论</text>
+  <text x="150" y="482" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="14" fill="#475569">架构 / 执行路径必做，界面分析按需；全员先读底座，每份都给技术栈结论</text>
   <rect x="960" y="449" width="150" height="32" rx="16" fill="#FEF3C7" stroke="#F59E0B"/>
-  <text x="1035" y="470" text-anchor="middle" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="12" fill="#92400E">3 个角色并行</text>
+  <text x="1035" y="470" text-anchor="middle" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="12" fill="#92400E">2–3 个角色并行</text>
   <line x1="110" y1="508" x2="110" y2="526" stroke="#94A3B8" stroke-width="2" marker-end="url(#arw)"/>
 
   <!-- 2 架构定稿 -->
@@ -67,7 +67,7 @@
   <rect x="88" y="555" width="44" height="32" rx="16" fill="#045B89"/>
   <text x="110" y="577" text-anchor="middle" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="14" font-weight="700" fill="#FFFFFF">2</text>
   <text x="150" y="562" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="19" font-weight="700" fill="#0F172A">架构定稿</text>
-  <text x="150" y="588" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="14" fill="#475569">模块清单表 + 交接文件清单 + canon 口径冻结表：会演进的事实在这里一拍定音</text>
+  <text x="150" y="588" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="14" fill="#475569">A-全量：模块清单表 + 运行细节 + canon；A-lite 由 engineer 合稿里一并给出</text>
   <rect x="960" y="555" width="150" height="32" rx="16" fill="#E0F2FE" stroke="#7DD3FC"/>
   <text x="1035" y="576" text-anchor="middle" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="12" fill="#075985">software-architect</text>
   <line x1="110" y1="614" x2="110" y2="632" stroke="#94A3B8" stroke-width="2" marker-end="url(#arw)"/>
@@ -97,9 +97,9 @@
   <rect x="88" y="873" width="44" height="32" rx="16" fill="#045B89"/>
   <text x="110" y="895" text-anchor="middle" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="14" font-weight="700" fill="#FFFFFF">3</text>
   <text x="150" y="880" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="19" font-weight="700" fill="#0F172A">切章写作（分批）</text>
-  <text x="150" y="906" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="14" fill="#475569">2–3 章一批、批间串行；写范围不重叠，每批交稿后 engineer 抽检代码示例能否跑通</text>
+  <text x="150" y="906" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="14" fill="#475569">每步四件套：先讲来龙去脉再讲难点 / 流转 / 动手；A-lite 单写手 2–3 批；两档都只在首批抽检一次</text>
   <rect x="960" y="873" width="150" height="32" rx="16" fill="#FEF3C7" stroke="#F59E0B"/>
-  <text x="1035" y="894" text-anchor="middle" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="12" fill="#92400E">每批 2 个写手</text>
+  <text x="1035" y="894" text-anchor="middle" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="12" fill="#92400E">A-lite 1 写手</text>
   <line x1="110" y1="932" x2="110" y2="950" stroke="#94A3B8" stroke-width="2" marker-end="url(#arw)"/>
 
   <!-- 4 复现总纲 -->
@@ -119,7 +119,7 @@
   <text x="150" y="1092" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="19" font-weight="700" fill="#0F172A">三向检查</text>
   <text x="150" y="1118" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="14" fill="#475569">改稿 / 技术校验 / 事实审计并行；只出清单，每条必须带「文件:行号 + 建议新文本」</text>
   <rect x="960" y="1085" width="150" height="32" rx="16" fill="#FEF3C7" stroke="#F59E0B"/>
-  <text x="1035" y="1106" text-anchor="middle" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="12" fill="#92400E">3 个角色并行</text>
+  <text x="1035" y="1106" text-anchor="middle" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="12" fill="#92400E">A-全量 3 向 / A-lite 2 向</text>
   <line x1="110" y1="1144" x2="110" y2="1162" stroke="#94A3B8" stroke-width="2" marker-end="url(#arw)"/>
 
   <!-- 5.5 面试与简历 -->
@@ -129,7 +129,7 @@
   <text x="150" y="1198" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="19" font-weight="700" fill="#0F172A">面试与简历</text>
   <text x="150" y="1224" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="14" fill="#475569">只基于定稿，不编数字与身份；逐条核验落点，无落点的表述必须删</text>
   <rect x="960" y="1191" width="150" height="32" rx="16" fill="#E0F2FE" stroke="#7DD3FC"/>
-  <text x="1035" y="1212" text-anchor="middle" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="12" fill="#075985">creator → auditor</text>
+  <text x="1035" y="1212" text-anchor="middle" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="12" fill="#075985">A-全量：creator → auditor</text>
   <line x1="110" y1="1250" x2="110" y2="1268" stroke="#94A3B8" stroke-width="2" marker-end="url(#arw)"/>
 
   <!-- 6 汇编落盘（闸门） -->
@@ -150,7 +150,7 @@
   <text x="84" y="1448" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="15" font-weight="600" fill="#334155">教程目录</text>
   <text x="84" y="1472" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="13" fill="#64748B">&lt;项目名&gt;-拆解教程/</text>
   <text x="84" y="1494" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="13" fill="#64748B">00 综述 · 01 架构 · 02 技术栈</text>
-  <text x="84" y="1514" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="13" fill="#64748B">03 实现（每步三件套）· 04 面试</text>
+  <text x="84" y="1514" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="13" fill="#64748B">03 实现（每步四件套）· 04 面试</text>
 
   <rect x="430" y="1420" width="340" height="104" rx="10" fill="#F9FAFB" stroke="#E5E7EB"/>
   <text x="454" y="1448" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="15" font-weight="600" fill="#334155">.work/ 过程物</text>

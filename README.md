@@ -4,7 +4,7 @@
 
 它是给 AI Agent（Claude Code、Cursor、DeepSeek Harness 等）用的 **skill**：你只负责编排一条由子 agent 组成的流水线，不亲手写章节、不亲手画架构图。输入是一个代码仓库 / 压缩包 / 一堆按专题写的笔记，输出是一棵按阅读顺序生长的教程目录树。
 
-![project2tutorial 工作流：12 个阶段、6 个角色、1 道机械闸门](assets/workflow.svg)
+![project2tutorial 工作流：11 个阶段、6 个角色、1 道机械闸门](assets/workflow.svg)
 
 ---
 
@@ -35,55 +35,22 @@ git clone https://github.com/Jenlybein/project2tutorial.git "$env:USERPROFILE\.a
 
 两种方式装出来的是同一份内容：`SKILL.md` + `references/` + `scripts/` + `assets/`。装好之后，遇到「帮我拆解这个项目」「把这个仓库讲透」「这个项目面试该怎么讲」这类请求，Agent 会自动加载它。
 
+---
+
 ## 为什么值得用
 
 三个问题决定了它必须这么组织：
 
 **1. 先建底座，再分析。**
-三个分析者各自摸索同一份代码库，必然得出互相矛盾的结论。真实案例里，同一项目并行分析后交叉核对撞出 7 处口径分歧，只能逐条回原文核实。所以第一步由 `senior-engineer` 产出一份**只记录「是什么」、不含任何判断**的事实底座，全员基于同一份开工——分歧的地基就没了。
+两到三个分析成员各自摸索同一份代码库，必然得出互相矛盾的结论。所以第一步先产出一份**只记录「是什么」、不含任何判断**的事实底座，全员基于同一份开工——分歧的地基就没了。
 
 **2. 文件是消息总线。**
-一个阶段的完整正文必须落成文件，下一阶段拿到的是**文件路径 + 一句「整篇读完再开工」**。摘要一旦进了上下文，内容就丢了——这不是节约，是破坏。
+一个阶段的完整正文必须落成文件，下一阶段拿到的是**文件路径 + 一句「整篇读完再开工」**。摘要一旦进了上下文，内容就丢了。
 
 **3. 三个检查方向不可合并。**
-主笔管「写得清不清楚」，工程师管「跑不跑得通」，审计管「漏没漏、对不对得上」。只做前两项，教程会「看起来很完整但少了东西」，而少了什么事后很难发现。
+主笔管「写得清不清楚」，工程师管「跑不跑得通」，审计管「漏没漏、对不对得上」。只做前两项，教程会「看起来很完整但少了东西」。
 
-还有一条是这次迭代新增的：**术语、归属、数字必须在动笔前冻结**。四十多篇的教程，一致性靠「写的人记性好」不成立——不冻结就会出现同一概念三四种叫法、同一份代码贴两遍、同一指标两个数字并存。
-
----
-
-## 工作流（12 个阶段）
-
-| Phase | 做什么 | 主要产出 | 谁来做 |
-|---|---|---|---|
-| **0** | 需求与素材确认：来源、读者、深度、输出目录、素材范围 | 五件事的答案 + Phase 序列 | 主理人 |
-| **0.5** | 结构底座：只记事实，不含判断 | `.work/00-base/baseline.md` | senior-engineer |
-| **1** | 多视角分析：架构 / 执行路径 /（有界面）交互，并行 | `.work/10-analysis/*.md` | architect + engineer (+ ui) |
-| **2** | 架构定稿：模块清单表、交接文件清单、**canon 口径冻结表** | `.work/20-arch/final-architecture.md` | software-architect |
-| **2.5** | 横向清单：六张表 + 数字账本 + 归属冲突候选 | `.work/25-crosscut/lists.md`、`28-authoring/numbers.md` | source-auditor |
-| **2.8** | **冻结词表与唯一归属**：正名 + `_Avoid_`；一段代码只一个 owner | `.work/28-authoring/glossary.md`、`ownership.md` | longform-writer |
-| **3** | 切章写作：2–3 章一批、批间串行；每批交稿后抽检代码示例 | 章节正文 + `assets/` | longform-writer + content-creator |
-| **4** | 复现总纲：**预先准备**（外部账号与能力）/ 路线图 / 环境准备 / 排错手册 | `03-实现开始/00-复现总指引/` | content-creator |
-| **5** | 三向检查：改稿 / 技术校验 / 事实审计，并行；只出清单 | `.work/50-review/*.md` | writer + engineer + auditor |
-| **5.5** | 面试与简历：只基于定稿，逐条核落点 | `04-面试与简历/` | content-creator → source-auditor |
-| **6** | 汇编落盘：拍快照 → 跑脚本 → **error 清零才许汇报** | 修正入稿 + `README.md` | 主理人 |
-
-阶段之间的交接永远是「文件路径 + 整篇读完再开工」，不是摘要。
-
----
-
-## 六个角色
-
-| role id | 名字 | 职责 | 何时拉 |
-|---|---|---|---|
-| `software-architect` | 高见远 · 软件架构师 | 整体与模块运行架构、模块边界与契约、技术栈定稿、**口径冻结表** | 必拉 |
-| `senior-engineer` | 寇豆码 · 高级开发工程师 | 结构底座、执行路径、数据流、构建机制、**每批写作后的代码示例抽检** | 必拉 |
-| `longform-writer` | 沈炼文 · 长文档主笔 | 目录骨架、章节正文、**冻结词表与唯一归属**、编号与结构治理、配图引用 | 必拉 |
-| `content-creator` | 顾灵犀 · 内容创作专家 | 教学表达、从零复现指引、面试与简历。**不得自造术语** | 必拉 |
-| `source-auditor` | 查秋毫 · 事实核查与素材审计 | 横向清单、**数字账本**、覆盖率对账、事实与溯源核验 | 必拉 |
-| `ui-designer` | 颜有度 · UI 设计师 | 界面结构、交互链路、界面配图与视觉规范 | **可选**：有界面，或全书图 ≥ 8 张需要统一视觉规范时 |
-
-角色就是 `references/roles/<id>.md`；派工时把整篇交给子 agent，分工边界写死在文件里。
+还有两条：**每个实现步骤先写 `00-来龙去脉.md`**，讲清上一步留下什么、项目进展到哪、为什么做这个功能、做完是什么样，再进入难点、流转与动手；四篇各守分工，每个知识点交代「从哪来 / 为什么现在 / 到哪去」，让初级程序员顺着读也不一头雾水，但不哄人、不靠降低信息密度换易读（完整尺度见 [references/output-spec.md](<references/output-spec.md>)）。另一条是动笔前的硬规矩：**术语、归属、数字必须先冻结**。四十多篇的教程，一致性靠「写的人记性好」不成立。一次跳过冻结的完整事故复盘见 [references/canon-and-glossary.md](<references/canon-and-glossary.md>)。
 
 ---
 
@@ -96,14 +63,11 @@ git clone https://github.com/Jenlybein/project2tutorial.git "$env:USERPROFILE\.a
 - 「我攒了 20 多篇按专题写的笔记，帮我整理成按实现步骤组织的教程，数字和上限别丢」
 - 「教程写好了，帮我拆一下这东西面试该怎么讲、简历能怎么写」
 
-技能内部按你手里的材料判档位：
+技能内部按你手里的材料判四档：**A** 完整拆解 + 全教程、**B** 只要架构、**C** 已有架构只要教程、**D** 只要章节文档。**A 档再按项目规模自动分 A-lite（默认，约 10–11 次派工）与 A-全量（23–28 次）：小项目合并 0.5/1/2、单写手 2–3 批、Phase 5 换人双查。两档都只在写作首批抽检一次，并采用三层派工输入。**
 
-| 档位 | 适用 | 路径 |
-|---|---|---|
-| **A** | 完整拆解 + 全教程（默认） | 0 → 0.5 → 1 → 2 → 2.5 → 2.8 → 3 → 4 → 5 → 5.5 → 6 |
-| **B** | 只要架构，不写教程 | 0 → 0.5 → 1 → 2 → 6 |
-| **C** | 已有架构，只要教程 | 2.5 → 2.8 → 3 → 4 → 5 → 6 |
-| **D** | 只要章节文档（素材重组） | 0.5 → 2.5 → 2.8 → 3 → 5 → 6 |
+**档位判据、A 档规模分流、Phase 序列、降级规则的唯一真相源是 [references/workflows.md](<references/workflows.md>)**；每个 Phase 怎么跑见 [references/pipeline.md](<references/pipeline.md>)。两处关键纪律：会写章节正文的档位都要先过 2.5 + 2.8（C 必做 2.5，2.8 的口径来源随档位变，逐档见 pipeline.md 的 Phase 2.8）；面试与简历章只在 A 默认产出，跳过要在汇报里说一声。
+
+阶段之间的交接永远是「文件路径 + 整篇读完再开工」，不是摘要。六个角色的分工表与派工模板见 [SKILL.md](<SKILL.md>)。
 
 ---
 
@@ -112,11 +76,13 @@ git clone https://github.com/Jenlybein/project2tutorial.git "$env:USERPROFILE\.a
 交付前必须跑机械审计，**脚本有 error 就不许汇报**：
 
 ```bash
-python scripts/audit_teardown.py "<教程目录>" \
-  --glossary "<教程目录>/.work/28-authoring/glossary.md"
+python scripts/audit_teardown.py "<教程目录>" --glossary "<教程目录>/.work/28-authoring/glossary.md"
 
 # 严格模式：README 必须直达每一个文件
 python scripts/audit_teardown.py "<教程目录>" --readme-strict --json
+
+# 审计 skill 说明仓库自身（跳过 SVG 画法示例与图片模板示例的误报）
+python scripts/audit_teardown.py . --profile skill --no-readme-check
 ```
 
 它分两层检查：
@@ -134,24 +100,11 @@ python scripts/audit_teardown.py "<教程目录>" --readme-strict --json
 --max-lines-hard N     单篇行数硬上限，默认 900
 --readme-strict        README 必须直接链到每个文件
 --no-readme-check      跳过 README 覆盖检查
+--profile skill        审计 skill 说明仓库自身，跳过示例类误报
 --json                 机器可读输出
 ```
 
-退出码：有 error 返回 1；warn 不改变退出码但需人眼判断。
-
----
-
-## 七条底线
-
-目录形态可以随项目改，这七条不行：
-
-1. **技术栈落到三层**：专章讲透、每步章首标注、复现指引给可安装的版本矩阵。
-2. **每一步都有可执行的验证点**：只给命令不给「看到什么算通过」，等于没给。
-3. **导航与术语全书一致**：README 链到每一章；同一概念全书同名同写法。
-4. **关键结论必须带溯源**：有源码写 `文件:行号`，素材重组写 `源素材文档#小节`；没有引用的关键结论按不可信处理。
-5. **面试与简历材料必须「答得上、核得实」**：每条表述都要在定稿里有落点，被追问三层仍答得出。
-6. **配图与正文同步，正文能独立成立**：结构图只能手写 SVG；禁用 Mermaid、禁用字符画、禁止 AI 生图代替结构图；图是文件引用，路径一错全图就白。
-7. **术语与归属先冻结，单篇有体量上限**：动笔前产出 `glossary.md` 与 `ownership.md`；同一段代码不重贴；单篇 ≤ 600 行，600–900 行必须加「本章怎么读」，> 900 行拆文件。
+退出码：有 error 返回 1；warn 不改变退出码但需人眼判断。八条交付底线（技术栈三层、验证点、导航与术语、溯源、每步来龙去脉与叙述链、面试简历可核验、配图、术语冻结与单篇体量）见 [SKILL.md](<SKILL.md>) 与 [references/output-spec.md](<references/output-spec.md>)。
 
 ---
 
@@ -159,52 +112,21 @@ python scripts/audit_teardown.py "<教程目录>" --readme-strict --json
 
 ```
 project2tutorial/
-├── SKILL.md                     # 技能主文件：角色表、流水线、执行机制、底线
+├── SKILL.md                     # 技能主文件：角色表、派工机制、档位判据、底线
 ├── README.md                    # 本文件
-├── assets/
-│   └── workflow.svg             # 工作流图（手写 SVG）
-├── evals/
-│   └── evals.json               # 四个场景的评测用例（只描述期望产出形态）
+├── assets/workflow.svg          # 工作流图（手写 SVG）
+├── evals/evals.json             # 产物与触发判别的评测用例
 ├── references/
-│   ├── pipeline.md              # 每个 Phase 的输入、验收标准、交接规则
-│   ├── output-spec.md           # 交付目录形态、页型边界、每步三件套骨架
-│   ├── canon-and-glossary.md    # 口径冻结 / 术语表 / 唯一归属 / 数字账本 / 自检 12 条
-│   ├── diagrams.md              # 图型选择、四类核心图的 SVG 画法、路径与 alt
-│   ├── workflows.md             # 小项目怎么裁剪流水线
-│   └── roles/
-│       ├── software-architect.md
-│       ├── senior-engineer.md
-│       ├── longform-writer.md
-│       ├── content-creator.md
-│       ├── source-auditor.md
-│       └── ui-designer.md
+│   ├── workflows.md             # 档位与 Phase 序列的唯一真相源
+│   ├── pipeline.md              # 每个 Phase 的输入、验收、交接
+│   ├── output-spec.md           # 交付目录形态、四件套分工、叙述链三问、页型边界
+│   ├── canon-and-glossary.md    # 事故复盘、账本字段、自检 12 条
+│   ├── diagrams.md              # 图型选择、SVG 画法、路径与 alt
+│   └── roles/                   # 六份角色作业说明，派工时整篇下发
 └── scripts/
-    ├── audit_teardown.py        # 机械审计（文件系统层 + 文本层）
+    ├── audit_teardown.py        # 机械审计：文件系统层 + 文本层
     └── scaffold_teardown.py     # 建目录骨架与 .work/
 ```
-
----
-
-## 文件清单
-
-| 路径 | 作用 |
-|---|---|
-| `SKILL.md` | 技能主文件：六角色表、12 阶段流水线、执行机制、七条底线、翻车对策 |
-| `assets/workflow.svg` | 本文件顶部那张工作流图（手写 SVG，viewBox 自适应） |
-| `evals/evals.json` | 四个场景的评测用例（只描述期望产出形态，断言在首轮跑完后补） |
-| `references/pipeline.md` | 每个 Phase 的输入、验收标准、交接规则；文件即消息总线的约定 |
-| `references/output-spec.md` | 交付目录形态、页型边界（每类文件不写什么）、每步三件套骨架 |
-| `references/canon-and-glossary.md` | 口径冻结 / 术语表 / 唯一归属 / 数字账本 / 口径演进标注 / 结构自检 12 条 |
-| `references/diagrams.md` | 图型选择、四类核心图的 SVG 画法、路径与 `alt`、配图归属 |
-| `references/workflows.md` | 小项目、无界面、无源码时怎么裁剪流水线 |
-| `references/roles/software-architect.md` | 架构视角分析 + 架构定稿 + canon 口径冻结表 |
-| `references/roles/senior-engineer.md` | 结构底座 + 执行路径 + 代码示例可执行性抽检 |
-| `references/roles/longform-writer.md` | 目录骨架 + 章节正文 + 冻结词表与唯一归属 + 结构治理 |
-| `references/roles/content-creator.md` | 教学表达 + 复现总纲 + 面试与简历（不得自造术语） |
-| `references/roles/source-auditor.md` | 横向清单 + 数字账本 + 覆盖率与事实核验 |
-| `references/roles/ui-designer.md` | 界面结构与交互链路 + 视觉规范（可选角色） |
-| `scripts/audit_teardown.py` | 机械审计：文件系统层 + 文本层，退出码即交付闸门 |
-| `scripts/scaffold_teardown.py` | 建教程目录骨架与 `.work/` 子目录 |
 
 ## 它不创造事实
 
@@ -215,4 +137,3 @@ project2tutorial/
 ## License
 
 MIT，见 [LICENSE](LICENSE)。你可以自由使用、修改、再发布，保留版权声明即可。
-

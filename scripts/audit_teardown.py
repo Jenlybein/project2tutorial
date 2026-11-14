@@ -375,7 +375,7 @@ class Audit:
             line_no = text[:m.start()].count("\n") + 1
             if "/" not in target and target == os.path.basename(path):
                 self.add("error", "self-link", path, line_no,
-                         "链接指向本篇自己（%s）：三件套导航应写「本篇（你在这里）」，不要做成链接" % target)
+                         "链接指向本篇自己（%s）：四件套导航应写「本篇（你在这里）」，不要做成链接" % target)
                 continue
             full = self.resolve(path, target)
             if not os.path.exists(full):
@@ -493,6 +493,27 @@ class Audit:
                 self.add("warn", "asset-dir-empty", d, 0,
                          "空的配图子目录：建了却一张图都没有，说明这一章的图漏产了")
 
+    def check_step_bundle(self):
+        """四件套兜底（仅 tutorial，warn 级）：01/02/03 允许合篇，00 必须独立，故只提醒不拦。"""
+        if self.profile != "tutorial":
+            return
+        step_markers = {"01-亮点难点.md", "02-功能流程与架构.md",
+                        "03-具体实现.md", "02-功能与架构.md"}
+        legacy = "02-功能与架构.md"
+        by_dir = {}
+        for md in self.md_files:
+            by_dir.setdefault(os.path.dirname(md), set()).add(os.path.basename(md))
+        for d, names in sorted(by_dir.items()):
+            if not (names & step_markers):
+                continue
+            if legacy in names:
+                self.add("warn", "step-legacy-name", os.path.join(d, legacy), 0,
+                         "旧文件名 02-功能与架构.md：四件套里应改名 02-功能流程与架构.md")
+            if "00-来龙去脉.md" not in names:
+                self.add("warn", "step-no-context", d, 0,
+                         "步骤目录缺 00-来龙去脉.md：读者会不知道为什么做这一步；"
+                         "00 必须独立成篇，不许与 01 合篇")
+
     def check_readme(self, strict=False):
         readme = os.path.join(self.root, "README.md")
         if not os.path.exists(readme):
@@ -539,6 +560,7 @@ class Audit:
             self.check_md(md)
         self.report_duplicates()
         self.check_assets()
+        self.check_step_bundle()
         if readme_check:
             self.check_readme(strict=readme_strict)
         return self.findings

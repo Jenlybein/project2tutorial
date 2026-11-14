@@ -21,7 +21,7 @@ import sys
 TOP_DIRS = ["00-项目综述", "01-整体架构", "02-技术栈", "04-面试与简历"]
 REPRO_DIR = os.path.join("03-实现开始", "00-复现总指引")
 WORK_SUBDIRS = ["00-base", "10-analysis", "20-arch", "25-crosscut",
-                "30-authoring", "40-repro", "50-review", "55-career"]
+                "28-authoring", "30-authoring", "40-repro", "50-review", "55-career"]
 
 
 def resolve_target(arg):
@@ -103,7 +103,7 @@ def main():
         if d == "03-实现开始":
             print("     00-复现总指引/")
             for s in steps:
-                print("     " + s + "/   01-亮点难点.md / 02-功能与架构.md / 03-具体实现.md")
+                print("     " + s + "/   00-来龙去脉.md / 01-亮点难点.md / 02-功能流程与架构.md / 03-具体实现.md")
     print("   assets/<与章节同名的子目录>/")
     print("   .work/  （中间产物，不交付）")
 
