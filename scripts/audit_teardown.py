@@ -14,7 +14,7 @@ README 导航是否覆盖每个文件、有没有孤立或空置的配图目录�
 
 用法:
     python audit_teardown.py "<教程目录>" [--json] [--no-readme-check]
-                             [--glossary .work/28-authoring/glossary.md]
+                             [--glossary .work/freeze/glossary.md]
                              [--max-lines 600] [--max-lines-hard 900]
 
 退出码: 有 error 时返回 1，否则 0。warn 不改变退出码。
@@ -551,7 +551,7 @@ class Audit:
             raise SystemExit("目录不存在: %s" % self.root)
         if self.glossary_path and not os.path.exists(self.glossary_path):
             self.add("warn", "glossary-missing", self.root, 0,
-                     "指定了词表但文件不存在：%s（Phase 2.8 没做，术语检查已跳过）"
+                     "指定了词表但文件不存在：%s（Phase 4 冻结没做，术语检查已跳过）"
                      % self.glossary_path)
         self.walk()
         if not self.md_files:
@@ -572,7 +572,7 @@ def main():
     parser.add_argument("--json", action="store_true", help="输出 JSON")
     parser.add_argument("--no-readme-check", action="store_true", help="跳过 README 导航覆盖检查")
     parser.add_argument("--glossary", default=None,
-                        help="冻结词表路径（.work/28-authoring/glossary.md），给了才做术语避用词检查")
+                        help="冻结词表路径（.work/freeze/glossary.md），给了才做术语避用词检查")
     parser.add_argument("--max-lines", type=int, default=600, help="单篇行数建议上限，默认 600")
     parser.add_argument("--max-lines-hard", type=int, default=900, help="单篇行数硬上限，默认 900")
     parser.add_argument("--readme-strict", action="store_true",

@@ -3,14 +3,15 @@
 """scaffold_teardown.py — 建出拆解教程的目录骨架（只建目录，不建空占位文件）。
 
 做的事:
-  * 建交付目录：00-项目综述 / 01-整体架构 / 02-技术栈 / 03-实现开始 / 04-面试与简历
+  * 建交付目录：00-项目综述 / 01-整体架构 / 02-技术栈 / 03-具体实现 / 04-面试与简历
+  * 建 03-具体实现/00-项目准备/
   * 建 assets/ 并按章节一一镜像出子目录（图跟着章节走，找图不用翻扁平列表）
   * 建 .work/ 阶段工作区（中间产物，不交付、不进 README、审计会跳过）
-  * 可选 --steps 一次建好 03-实现开始/NN-<步骤名>/ 与对应 assets 子目录
+  * 可选 --steps 一次建好 03-具体实现/NN-<能力主题>/ 与对应 assets 子目录
 
 用法:
     python scaffold_teardown.py "知识库问答-拆解教程"
-    python scaffold_teardown.py ./my-proj-拆解教程 --steps "环境准备,向量化,混合检索"
+    python scaffold_teardown.py ./my-proj-拆解教程 --steps "工程可维护性,混合检索"
 退出码 0。只依赖标准库。
 """
 import argparse
@@ -19,9 +20,9 @@ import re
 import sys
 
 TOP_DIRS = ["00-项目综述", "01-整体架构", "02-技术栈", "04-面试与简历"]
-REPRO_DIR = os.path.join("03-实现开始", "00-复现总指引")
-WORK_SUBDIRS = ["00-base", "10-analysis", "20-arch", "25-crosscut",
-                "28-authoring", "30-authoring", "40-repro", "50-review", "55-career"]
+PREP_DIR = os.path.join("03-具体实现", "00-项目准备")
+WORK_SUBDIRS = ["01-map", "02-arch", "03-deepdive", "freeze",
+                "05-authoring", "06-review"]
 
 
 def resolve_target(arg):
@@ -50,7 +51,7 @@ def normalize_steps(raw):
 def main():
     parser = argparse.ArgumentParser(description="拆解教程目录骨架")
     parser.add_argument("target", help="教程目录，或项目名（会自动补 -拆解教程）")
-    parser.add_argument("--steps", default="", help="实现步骤名，逗号分隔，如 \"环境准备,向量化,混合检索\"")
+    parser.add_argument("--steps", default="", help="能力主题名，逗号分隔，如 \"工程可维护性,混合检索\"")
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args()
 
@@ -63,17 +64,17 @@ def main():
     steps = normalize_steps(args.steps)
 
     chapter_dirs = list(TOP_DIRS)
-    chapter_dirs.insert(3, "03-实现开始")
-    step_dirs = [os.path.join("03-实现开始", s) for s in steps]
+    chapter_dirs.insert(3, "03-具体实现")
+    step_dirs = [os.path.join("03-具体实现", s) for s in steps]
 
     wanted = [root]
     wanted += [os.path.join(root, d) for d in chapter_dirs]
-    wanted += [os.path.join(root, REPRO_DIR)]
+    wanted += [os.path.join(root, PREP_DIR)]
     wanted += [os.path.join(root, s) for s in step_dirs]
     wanted += [os.path.join(root, ".work")] + [os.path.join(root, ".work", d) for d in WORK_SUBDIRS]
 
     # assets mirrors chapters (and steps), same names, no numbering prefixes added
-    asset_mirrors = chapter_dirs + [REPRO_DIR] + step_dirs
+    asset_mirrors = chapter_dirs + [PREP_DIR] + step_dirs
     wanted += [os.path.join(root, "assets")] + [os.path.join(root, "assets", d) for d in asset_mirrors]
 
     created = []
@@ -100,17 +101,17 @@ def main():
     print(root.replace("\\", "/"))
     for d in chapter_dirs:
         print("   " + d + "/")
-        if d == "03-实现开始":
-            print("     00-复现总指引/")
+        if d == "03-具体实现":
+            print("     00-项目准备/   01-外部服务.md / 02-搭建骨架.md")
             for s in steps:
                 print("     " + s + "/   00-来龙去脉.md / 01-亮点难点.md / 02-功能流程与架构.md / 03-具体实现.md")
     print("   assets/<与章节同名的子目录>/")
     print("   .work/  （中间产物，不交付）")
 
     if not steps:
-        print("\n提示: 章节目录还不确定时，实现步骤可在 Phase 3 由主笔定稿后再补建；")
-        print("      也可跑 --steps 一次建好，例如 --steps \"环境准备,向量化,混合检索\"")
-    print("\n下一步: Phase 0.5 —— 派 senior-engineer 产出 .work/00-base/baseline.md")
+        print("\n提示: 能力主题还不确定时，实现目录可在 Phase 5 由主笔定稿后再补建；")
+        print("      也可跑 --steps 一次建好，例如 --steps \"工程可维护性,混合检索\"")
+    print("\n下一步: Phase 1 —— 派 senior-engineer 产出 .work/01-map/codemap.md")
     return 0
 
 
