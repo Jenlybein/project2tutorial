@@ -90,7 +90,7 @@ git clone https://github.com/Jenlybein/project2tutorial.git "$env:USERPROFILE\.a
 
 ## 质量闸门
 
-交付前必须跑机械审计，**脚本有 error 就不许汇报**：
+交付前跑一次机械审计；**脚本有 error 就先修，别带着 error 汇报**：
 
 ```bash
 python scripts/audit_teardown.py "<教程目录>" --glossary "<教程目录>/.work/freeze/glossary.md"
